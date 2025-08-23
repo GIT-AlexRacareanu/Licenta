@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ABATherapy</string>
+    <string-array name="user_roles">
+        <item>Parent</item>
+        <item>Therapist</item>
+        <item>Evaluator</item>
+        <item>Admin</item>
+    </string-array>
+</resources>

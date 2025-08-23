@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "800854940331",
+    "project_id": "programarimedicale-889da",
+    "storage_bucket": "programarimedicale-889da.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:800854940331:android:33f57eb2e6d16451b135ee",
+        "android_client_info": {
+          "package_name": "com.example.abatherapy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "800854940331-h1kpt3licuslad3g095u1f8ff7sc07vh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyuvDYuriyoMDKE6w4jm1D7hq88bnhzTI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "800854940331-h1kpt3licuslad3g095u1f8ff7sc07vh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:800854940331:android:354ac87b1b42d592b135ee",
+        "android_client_info": {
+          "package_name": "com.example.programarimedicaleapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "800854940331-h1kpt3licuslad3g095u1f8ff7sc07vh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyuvDYuriyoMDKE6w4jm1D7hq88bnhzTI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "800854940331-h1kpt3licuslad3g095u1f8ff7sc07vh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
