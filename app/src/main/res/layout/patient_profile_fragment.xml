@@ -1,0 +1,48 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#ECEFF1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Profile Card -->
+    <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:layout_marginBottom="20dp" app:cardCornerRadius="20dp" app:cardElevation="8dp" app:cardUseCompatPadding="true" app:cardBackgroundColor="#FFFFFF"> <LinearLayout android:orientation="vertical" android:padding="20dp" android:gravity="center_horizontal" android:layout_width="match_parent" android:layout_height="wrap_content"> <!-- Profile Picture (rounded by circle_bg + clipToOutline) --> <ImageView android:id="@+id/profileImage" android:layout_width="100dp" android:layout_height="100dp" android:src="@drawable/profile_ic" android:scaleType="centerCrop" android:clipToOutline="true" android:layout_marginBottom="16dp" /> <!-- Name --> <TextView android:id="@+id/txtFullName" android:text="John Doe" android:textSize="22sp" android:textStyle="bold" android:textColor="#212121" android:layout_width="wrap_content" android:layout_height="wrap_content"/> <!-- Role --> <TextView android:id="@+id/txtRole" android:text="Senior Software Engineer" android:textSize="16sp" android:textStyle="italic" android:textColor="#3F51B5" android:layout_marginTop="4dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/> <!-- Divider --> <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0" android:layout_marginTop="16dp" android:layout_marginBottom="12dp"/> <!-- Contact Info --> <TextView android:id="@+id/txtEmail" android:text="john.doe@email.com" android:textSize="15sp" android:textColor="#555555" android:layout_gravity="left" android:layout_marginLeft="40dp" android:drawableStart="@android:drawable/ic_dialog_email" android:drawablePadding="8dp" android:layout_marginTop="4dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/> <TextView android:id="@+id/txtPhone" android:text="+1 234 567 890" android:textSize="15sp" android:textColor="#555555" android:layout_gravity="left" android:layout_marginLeft="40dp" android:drawableStart="@android:drawable/ic_menu_call" android:drawablePadding="8dp" android:layout_marginTop="6dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/> <TextView android:id="@+id/txtAdress" android:text="123 Main St, New York" android:textSize="15sp" android:textColor="#555555" android:layout_gravity="left" android:layout_marginLeft="40dp" android:drawableStart="@android:drawable/ic_menu_mylocation" android:drawablePadding="8dp" android:layout_marginTop="6dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/> <TextView android:id="@+id/txtExperience" android:text="Experience: 5 years" android:textSize="15sp" android:textColor="#009688" android:drawableStart="@android:drawable/ic_menu_info_details" android:drawablePadding="8dp" android:layout_marginTop="6dp" android:layout_gravity="left" android:layout_marginLeft="40dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/> </LinearLayout> </androidx.cardview.widget.CardView>
+
+    <!-- Children Title -->
+    <TextView
+        android:id="@+id/txtChildTitle"
+        android:text="Children"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#212121"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginStart="4dp"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerChildren"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:clipToPadding="false"
+            android:scrollbars="vertical" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddChild"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:src="@drawable/add_ic"
+            android:contentDescription="Add Child" />
+    </FrameLayout>
+
+</LinearLayout>
