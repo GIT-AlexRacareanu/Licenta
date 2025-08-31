@@ -1,51 +1,42 @@
 package com.example.abatherapy.Calendar;
 
+import com.google.android.material.datepicker.CalendarConstraints;
 import android.os.Parcel;
 import android.os.Parcelable;
-import com.google.android.material.datepicker.CalendarConstraints;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
+import java.util.HashSet;
+import java.util.Set;
 
 public class BlockedDatesValidator implements CalendarConstraints.DateValidator {
-    private final List<Long> blockedDates = new ArrayList<>();
 
-    public BlockedDatesValidator(List<String> dateStrings) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        for (String d : dateStrings) {
-            try {
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(sdf.parse(d));
-                cal.set(Calendar.HOUR_OF_DAY, 0);
-                cal.set(Calendar.MINUTE, 0);
-                cal.set(Calendar.SECOND, 0);
-                cal.set(Calendar.MILLISECOND, 0);
-                blockedDates.add(cal.getTimeInMillis());
-            } catch (ParseException ignored) {}
-        }
+    private final Set<Long> blockedDays = new HashSet<>();
+
+    public BlockedDatesValidator(Set<Long> fullyBookedDays) {
+        blockedDays.addAll(fullyBookedDays);
     }
 
     @Override
     public boolean isValid(long date) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(date);
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-        return !blockedDates.contains(cal.getTimeInMillis());
+        return !blockedDays.contains(date);
     }
 
-    @Override public int describeContents() { return 0; }
-    @Override public void writeToParcel(Parcel dest, int flags) {}
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
-    public static final Parcelable.Creator<BlockedDatesValidator> CREATOR =
-            new Parcelable.Creator<>() {
-                public BlockedDatesValidator createFromParcel(Parcel in) { return new BlockedDatesValidator(new ArrayList<>()); }
-                public BlockedDatesValidator[] newArray(int size) { return new BlockedDatesValidator[size]; }
-            };
+    @Override
+    public void writeToParcel(Parcel parcel, int i) { }
+
+    public static final Parcelable.Creator<BlockedDatesValidator> CREATOR = new Parcelable.Creator<BlockedDatesValidator>() {
+        @Override
+        public BlockedDatesValidator createFromParcel(Parcel parcel) {
+            return new BlockedDatesValidator(new HashSet<>());
+        }
+
+        @Override
+        public BlockedDatesValidator[] newArray(int i) {
+            return new BlockedDatesValidator[i];
+        }
+    };
 }

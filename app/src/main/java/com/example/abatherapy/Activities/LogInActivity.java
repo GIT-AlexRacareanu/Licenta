@@ -8,16 +8,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.abatherapy.Database.DBManager;
+import com.example.abatherapy.Activities.Evaluator.EvaluatorActivity;
+import com.example.abatherapy.Activities.Patient.PatientActivity;
+import com.example.abatherapy.Activities.Therapist.TherapistActivity;
 import com.example.abatherapy.Models.User;
 import com.example.abatherapy.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class LogInActivity extends AppCompatActivity {
-
-    private FirebaseDatabase database = DBManager.getDB();
     Button logInButton;
     EditText editEmail,editPassword;
     TextView textSignUpLink;
@@ -43,10 +42,31 @@ public class LogInActivity extends AppCompatActivity {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 User.databaseMapper(user, actualUser -> {
                                     if (actualUser != null) {
-                                        Intent intent = new Intent(this, PatientActivity.class);
-                                        intent.putExtra("user", actualUser);
-                                        startActivity(intent);
-                                        finish();
+                                        Intent intent = null;
+                                        switch(actualUser.getRole())
+                                        {
+                                            case "Pacient":
+                                                intent = new Intent(this, PatientActivity.class);
+                                                intent.putExtra("user", actualUser);
+                                                startActivity(intent);
+                                                finish();
+                                                break;
+                                            case "Terapeut":
+                                                if(actualUser.isEvaluator()) {
+                                                    intent = new Intent(this, EvaluatorActivity.class);
+                                                    intent.putExtra("user", actualUser);
+                                                    startActivity(intent);
+                                                    finish();
+                                                } else {
+                                                    intent = new Intent(this, TherapistActivity.class);
+                                                    intent.putExtra("user", actualUser);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                                break;
+                                            default:
+                                                break;
+                                        }
                                     } else {
                                         Toast.makeText(this, "User data not found", Toast.LENGTH_SHORT).show();
                                     }

@@ -11,6 +11,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.abatherapy.Activities.Evaluator.EvaluatorActivity;
+import com.example.abatherapy.Activities.Patient.PatientActivity;
+import com.example.abatherapy.Activities.Therapist.TherapistActivity;
 import com.example.abatherapy.Database.DBManager;
 import com.example.abatherapy.Models.User;
 import com.example.abatherapy.R;
@@ -21,12 +24,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SignUpActivity extends AppCompatActivity {
-    private FirebaseDatabase database = DBManager.getDB();
     EditText editFirstName, editLastName, editPhone, editAddress, editDescriere, editExperienta, editSpecializare, editEmail, editPassword, editConfirmPassword;
     TextView textLoginLink, textTitle;
     Button signUpButton;
     Spinner spinnerRole;
     MaterialSwitch isEvaluatorSwitch;
+    
+    User newUser = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +69,7 @@ public class SignUpActivity extends AppCompatActivity {
             String descriere = editDescriere.getText().toString().trim();
             String experienta = editExperienta.getText().toString().trim();
             String specializare = editSpecializare.getText().toString().trim();
-            boolean evaluator = isEvaluatorSwitch.isChecked(); // assume this is a Switch
+            boolean evaluator = isEvaluatorSwitch.isChecked();
 
             if (!password.equals(confirmPassword)) {
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
@@ -80,7 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
                             if (firebaseUser != null) {
                                 String uid = firebaseUser.getUid();
 
-                                User newUser = new User(
+                                newUser = new User(
                                         address,
                                         descriere,
                                         email,
@@ -116,10 +120,34 @@ public class SignUpActivity extends AppCompatActivity {
                 .set(user)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(this, "User registered successfully", Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(SignUpActivity.this,MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                    
+                    if (newUser != null) {
+                        Intent intent = null;
+                        switch(newUser.getRole())
+                        {
+                            case "Pacient":
+                                intent = new Intent(this, PatientActivity.class);
+                                intent.putExtra("user", newUser);
+                                startActivity(intent);
+                                finish();
+                                break;
+                            case "Terapeut":
+                                if(newUser.isEvaluator()) {
+                                    intent = new Intent(this, EvaluatorActivity.class);
+                                    intent.putExtra("user", newUser);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    intent = new Intent(this, TherapistActivity.class);
+                                    intent.putExtra("user", newUser);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Failed to save user profile: " + e.getMessage(), Toast.LENGTH_LONG).show();

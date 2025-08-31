@@ -25,13 +25,6 @@ public class User implements Serializable {
         this.uid = uid;
     }
 
-    public User(String firstName, String lastName, String uid)
-    {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.uid = uid;
-    }
-
     private String address = "";
     private String descriere = "";
     private String email = "";
@@ -51,7 +44,6 @@ public class User implements Serializable {
     public String getDescriere() {
         return descriere;
     }
-
     public String getEmail() {
         return email;
     }
@@ -87,7 +79,6 @@ public class User implements Serializable {
     public boolean isEvaluator() {
         return evaluator;
     }
-
     public void setAddress(String address) {
         this.address = address;
     }
@@ -95,7 +86,6 @@ public class User implements Serializable {
     public void setDescriere(String descriere) {
         this.descriere = descriere;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -135,7 +125,27 @@ public class User implements Serializable {
                     if (document.exists()) {
                         String firstName = document.getString("firstName");
                         String lastName = document.getString("lastName");
-                        User user = new User(firstName, lastName, uid);
+                        String email = document.getString("email");
+                        String phone = document.getString("phone");
+                        String role = document.getString("role");
+                        String specializare = document.getString("specializare");
+                        String experienta = document.getString("experienta");
+                        String descriere = document.getString("descriere");
+                        String address = document.getString("address");
+                        boolean evaluator = document.getBoolean("evaluator");
+                        User user = new User(
+                                address,
+                                descriere,
+                                email,
+                                evaluator,
+                                experienta,
+                                firstName,
+                                lastName,
+                                phone,
+                                role,
+                                specializare,
+                                document.getId()
+                        );
                         callback.onUserLoaded(user);
                     } else {
                         callback.onUserLoaded(null);

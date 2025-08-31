@@ -13,7 +13,6 @@
         android:gravity="center_horizontal"
         android:spacing="12dp">
 
-        <!-- Title -->
         <TextView
             android:id="@+id/titleText"
             android:layout_width="wrap_content"
@@ -24,7 +23,6 @@
             android:textColor="?attr/colorPrimary"
             android:layout_marginBottom="24dp" />
 
-        <!-- First Name -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,7 +34,6 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Last Name -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,7 +45,6 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Email -->
         <com.google.android.material.textfield.TextInputLayout
             android:hint="Email"
             android:layout_width="match_parent"
@@ -114,7 +110,6 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Role Spinner -->
         <com.google.android.material.textfield.TextInputLayout
             android:hint="Role"
             android:layout_width="match_parent"
@@ -127,7 +122,6 @@
                 android:spinnerMode="dropdown" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Description -->
         <com.google.android.material.textfield.TextInputLayout
             android:hint="Descriere"
             android:layout_width="match_parent"

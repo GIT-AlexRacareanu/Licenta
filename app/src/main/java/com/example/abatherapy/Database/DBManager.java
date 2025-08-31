@@ -1,5 +1,4 @@
 package com.example.abatherapy.Database;
-import android.util.Log;
 
 import com.example.abatherapy.Children;
 import com.example.abatherapy.Models.User;
@@ -11,9 +10,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class DBManager {
 
