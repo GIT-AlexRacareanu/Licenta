@@ -55,7 +55,7 @@ public class EvaluatorProfileFragment extends Fragment {
             txtEmail.setText("Email: " + user.getEmail());
             txtPhone.setText("Telefon: " + user.getPhone());
             txtAddress.setText("Adresa: " + user.getAddress());
-            txtRole.setText("Rol: " + user.getRole());
+            txtRole.setText(user.getRole());
             txtSpecializare.setText("Specializare: " + user.getSpecializare());
             txtExperienta.setText("Experienta: " + user.getExperienta());
             txtDescriere.setText("Descriere: " + user.getDescriere());

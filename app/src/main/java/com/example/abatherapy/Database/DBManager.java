@@ -1,6 +1,6 @@
 package com.example.abatherapy.Database;
 
-import com.example.abatherapy.Children;
+import com.example.abatherapy.Models.Children;
 import com.example.abatherapy.Models.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

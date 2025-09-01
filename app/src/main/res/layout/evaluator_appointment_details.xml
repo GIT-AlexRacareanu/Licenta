@@ -1,51 +1,81 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="20dp"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="6dp"
+    android:padding="16dp">
 
-    <TextView
-        android:id="@+id/txtDate"
-        android:text="Date:"
-        android:textSize="16sp"
-        android:layout_marginBottom="8dp"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/txtChild"
-        android:text="Child:"
-        android:textSize="16sp"
-        android:layout_marginBottom="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <!-- Appointment Date -->
+        <TextView
+            android:id="@+id/txtDate"
+            android:text="Date: 12 Aug 2025, 10:00"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/txtParent"
-        android:text="Parent:"
-        android:textSize="16sp"
-        android:layout_marginBottom="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <!-- Child Name -->
+        <TextView
+            android:id="@+id/txtChild"
+            android:text="Child: John Doe"
+            android:textSize="15sp"
+            android:layout_marginBottom="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/txtStatus"
-        android:text="Status:"
-        android:textSize="16sp"
-        android:layout_marginBottom="12dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <!-- Parent Name -->
+        <TextView
+            android:id="@+id/txtParent"
+            android:text="Parent: Jane Doe"
+            android:textSize="15sp"
+            android:layout_marginBottom="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-    <Button
-        android:id="@+id/btnActions"
-        android:text="Accept Appointment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <!-- Therapist Name -->
+        <TextView
+            android:id="@+id/txtTherapist"
+            android:text="Therapist: Dr. Smith"
+            android:textSize="15sp"
+            android:layout_marginBottom="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-    <EditText
-        android:id="@+id/edtNotes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter notes here"
-        android:visibility="gone"/>
-</LinearLayout>
+        <!-- Appointment Status -->
+        <TextView
+            android:id="@+id/txtStatus"
+            android:text="Status: Pending"
+            android:textSize="15sp"
+            android:layout_marginBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Action Button -->
+        <Button
+            android:id="@+id/btnActions"
+            android:text="Accept Appointment"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Notes -->
+        <EditText
+            android:id="@+id/edtNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter notes here"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:visibility="gone"
+            android:layout_marginTop="12dp"/>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

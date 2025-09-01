@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.abatherapy.Calendar.BlockedDatesValidator;
-import com.example.abatherapy.Children;
+import com.example.abatherapy.Models.Children;
 import com.example.abatherapy.Models.Appointment;
 import com.example.abatherapy.Models.User;
 import com.example.abatherapy.R;

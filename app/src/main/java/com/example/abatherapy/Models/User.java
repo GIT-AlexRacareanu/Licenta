@@ -44,6 +44,7 @@ public class User implements Serializable {
     public String getDescriere() {
         return descriere;
     }
+
     public String getEmail() {
         return email;
     }

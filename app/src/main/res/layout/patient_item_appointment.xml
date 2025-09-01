@@ -16,35 +16,64 @@
 
         <TextView
             android:id="@+id/txtDate"
-            android:text="12 Aug 2025, 10:00"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:text="12 Aug 2025, 10:00"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtChild"
-            android:text="Child: John Doe"
-            android:textSize="14sp"
-            android:textColor="#555555"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:text="Child: John Doe"
+            android:textColor="#555555"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txtTherapist"
-            android:text="Therapist: Dr. Smith"
-            android:textSize="14sp"
-            android:textColor="#555555"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_marginBottom="8dp"
+            android:text="Therapist: Dr. Smith"
+            android:textColor="#555555"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAccept"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Accept"
+                android:textAllCaps="false"
+                android:visibility="gone"
+                app:cornerRadius="8dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFinalize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Finalize"
+                android:textAllCaps="false"
+                android:layout_marginStart="12dp"
+                android:visibility="gone"
+                app:cornerRadius="8dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

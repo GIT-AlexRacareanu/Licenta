@@ -1,30 +1,75 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="12dp"
-    android:layout_marginBottom="8dp">
+    android:layout_margin="8dp"
+    card_view:cardCornerRadius="12dp"
+    card_view:cardElevation="6dp"
+    card_view:cardUseCompatPadding="true">
 
-    <TextView
-        android:id="@+id/txtChildName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Child Name"
-        android:textStyle="bold"
-        android:textSize="16sp"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/txtDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2025-08-24"
-        android:textSize="14sp"/>
+        <!-- Child Name -->
+        <TextView
+            android:id="@+id/txtChildName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Child Name"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="#222222"/>
 
-    <TextView
-        android:id="@+id/txtStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="pending"
-        android:textSize="14sp"
-        android:textColor="@android:color/holo_blue_dark"/>
-</LinearLayout>
+        <!-- Date -->
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textSize="14sp"
+            android:paddingTop="4dp"
+            android:textColor="#333333"/>
+
+        <!-- Status with colored indicator -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:gravity="center_vertical">
+
+            <View
+                android:id="@+id/viewStatusIndicator"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginEnd="6dp"
+                android:layout_gravity="center_vertical"
+                android:backgroundTintMode="src_in"
+                android:backgroundTint="#4CAF50" />
+
+            <TextView
+                android:id="@+id/txtStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status"
+                android:textSize="14sp"
+                android:textColor="#555555"/>
+        </LinearLayout>
+
+        <!-- Notes -->
+        <TextView
+            android:id="@+id/txtNotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notes"
+            android:textSize="14sp"
+            android:paddingTop="6dp"
+            android:textColor="#777777"
+            android:ellipsize="end"
+            android:maxLines="2"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

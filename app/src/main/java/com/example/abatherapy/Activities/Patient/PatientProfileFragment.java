@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.abatherapy.Children;
+import com.example.abatherapy.Models.Children;
 import com.example.abatherapy.Models.User;
 import com.example.abatherapy.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

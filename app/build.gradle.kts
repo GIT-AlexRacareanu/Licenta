@@ -33,6 +33,9 @@ android {
 }
 
 dependencies {
+    implementation ("com.jakewharton.threetenabp:threetenabp:1.4.4")
+    implementation ("androidx.recyclerview:recyclerview:1.3.1")
+    implementation ("com.github.prolificinteractive:material-calendarview:2.0.1")
     implementation ("com.google.android.material:material:1.9.0")
     implementation(platform("com.google.firebase:firebase-bom:34.0.0"))
     implementation("com.google.firebase:firebase-analytics")
@@ -45,6 +48,7 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation("com.google.firebase:firebase-firestore")
     implementation(libs.firebase.firestore)
+    implementation(libs.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

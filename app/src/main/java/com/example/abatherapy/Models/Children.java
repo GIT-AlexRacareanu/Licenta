@@ -1,8 +1,8 @@
-package com.example.abatherapy;
+package com.example.abatherapy.Models;
 
-import androidx.annotation.NonNull;
+import java.io.Serializable;
 
-public class Children {
+public class Children implements Serializable {
 
     public Children(){
     }

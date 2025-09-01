@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,9 +31,12 @@ public class PatientHomeFragment extends Fragment {
     private User user;
 
     private TextView txtGreeting, txtSubtitle;
-    private RecyclerView recyclerAppointments;
+    private RecyclerView recyclerAppointments, recyclerEvaluators;
     private List<Appointment> upcomingAppointments = new ArrayList<>();
     private AppointmentsAdapter appointmentsAdapter;
+
+    private List<User> evaluatorList = new ArrayList<>();
+    private EvaluatorsAdapter evaluatorsAdapter;
 
     private FirebaseFirestore db;
 
@@ -60,21 +64,29 @@ public class PatientHomeFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         txtGreeting = view.findViewById(R.id.txtGreeting);
         txtSubtitle = view.findViewById(R.id.txtSubtitle);
         recyclerAppointments = view.findViewById(R.id.recyclerUpcomingAppointments);
+        recyclerEvaluators = view.findViewById(R.id.recyclerEvaluators);
 
+        // Upcoming Appointments RecyclerView
         recyclerAppointments.setLayoutManager(new LinearLayoutManager(requireContext()));
         appointmentsAdapter = new AppointmentsAdapter(upcomingAppointments);
         recyclerAppointments.setAdapter(appointmentsAdapter);
+
+        // Evaluators RecyclerView
+        recyclerEvaluators.setLayoutManager(new LinearLayoutManager(requireContext()));
+        evaluatorsAdapter = new EvaluatorsAdapter(evaluatorList);
+        recyclerEvaluators.setAdapter(evaluatorsAdapter);
 
         if (user != null) {
             txtGreeting.setText("Bine te-am găsit, " + user.getFirstName() + " " + user.getLastName() + "!");
             txtSubtitle.setText("Future Appointments");
             loadUpcomingAppointments();
+            loadEvaluators();
         }
     }
 
@@ -102,44 +114,53 @@ public class PatientHomeFragment extends Fragment {
                         "Eroare la încărcarea programărilor", Toast.LENGTH_SHORT).show());
     }
 
-    private static class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsViewHolder> {
+    private void loadEvaluators() {
+        db.collection("users")
+                .whereEqualTo("evaluator", true)
+                .get()
+                .addOnSuccessListener(querySnapshot -> {
+                    evaluatorList.clear();
+                    for (DocumentSnapshot doc : querySnapshot) {
+                        User evaluator = doc.toObject(User.class);
+                        if (evaluator != null) evaluatorList.add(evaluator);
+                    }
+                    evaluatorsAdapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(requireContext(), "Eroare la încărcarea evaluatorilor", Toast.LENGTH_SHORT).show());
+    }
 
+    // ------------------- Appointments Adapter -------------------
+    private static class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsViewHolder> {
         private final List<Appointment> appointments;
 
         AppointmentsAdapter(List<Appointment> appointments) {
             this.appointments = appointments;
         }
 
+        @NonNull
         @Override
-        public AppointmentsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public AppointmentsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.patient_item_appointment, parent, false);
             return new AppointmentsViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(AppointmentsViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull AppointmentsViewHolder holder, int position) {
             Appointment appt = appointments.get(position);
-            holder.bind(
-                    appt.getDate(),
-                    appt.getTherapistId(),
-                    appt.getChildId()
-            );
+            holder.bind(appt.getDate(), appt.getTherapistId(), appt.getChildId());
         }
 
         @Override
-        public int getItemCount() {
-            return appointments.size();
-        }
+        public int getItemCount() { return appointments.size(); }
     }
 
     private static class AppointmentsViewHolder extends RecyclerView.ViewHolder {
-
         private final TextView txtDate, txtTherapist, txtChild;
+        private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        private FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        public AppointmentsViewHolder(View itemView) {
+        public AppointmentsViewHolder(@NonNull View itemView) {
             super(itemView);
             txtDate = itemView.findViewById(R.id.txtDate);
             txtTherapist = itemView.findViewById(R.id.txtTherapist);
@@ -155,9 +176,7 @@ public class PatientHomeFragment extends Fragment {
                             if (doc.exists()) {
                                 String name = doc.getString("firstName") + " " + doc.getString("lastName");
                                 txtTherapist.setText("Therapist: " + (name != null ? name : "Unknown"));
-                            } else {
-                                txtTherapist.setText("Therapist: Unknown");
-                            }
+                            } else txtTherapist.setText("Therapist: Unknown");
                         })
                         .addOnFailureListener(e -> txtTherapist.setText("Therapist: Error"));
             }
@@ -165,15 +184,50 @@ public class PatientHomeFragment extends Fragment {
             if (childId != null && !childId.isEmpty()) {
                 db.collection("children").document(childId).get()
                         .addOnSuccessListener(doc -> {
-                            Log.d("TEEEEEST", doc.getId());
                             if (doc.exists()) {
                                 String name = doc.getString("firstName") + " " + doc.getString("lastName");
                                 txtChild.setText("Child: " + (name != null ? name : "Unknown"));
-                            } else {
-                                txtChild.setText("Child: Unknown");
-                            }
+                            } else txtChild.setText("Child: Unknown");
                         })
                         .addOnFailureListener(e -> txtChild.setText("Child: Error"));
+            }
+        }
+    }
+
+    // ------------------- Evaluators Adapter -------------------
+    public static class EvaluatorsAdapter extends RecyclerView.Adapter<EvaluatorsAdapter.EvaluatorViewHolder> {
+
+        private final List<User> evaluators;
+
+        public EvaluatorsAdapter(List<User> evaluators) {
+            this.evaluators = evaluators;
+        }
+
+        @NonNull
+        @Override
+        public EvaluatorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.evaluator_item, parent, false);
+            return new EvaluatorViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull EvaluatorViewHolder holder, int position) {
+            User evaluator = evaluators.get(position);
+            holder.txtName.setText(evaluator.getFirstName() + " " + evaluator.getLastName());
+            holder.txtExperience.setText("Experience: " + (evaluator.getExperienta() != null ? evaluator.getExperienta() : "N/A"));
+        }
+
+        @Override
+        public int getItemCount() { return evaluators.size(); }
+
+        static class EvaluatorViewHolder extends RecyclerView.ViewHolder {
+            TextView txtName, txtExperience;
+
+            public EvaluatorViewHolder(@NonNull View itemView) {
+                super(itemView);
+                txtName = itemView.findViewById(R.id.txtEvaluatorName);
+                txtExperience = itemView.findViewById(R.id.txtEvaluatorExperience);
             }
         }
     }
