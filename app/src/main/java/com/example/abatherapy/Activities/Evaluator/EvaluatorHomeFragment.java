@@ -142,7 +142,6 @@ public class EvaluatorHomeFragment extends Fragment {
                         "Failed to load appointments", Toast.LENGTH_SHORT).show());
     }
 
-    // Create new appointment from old
     private void createNewFromOld(Appointment oldAppt) {
         View dialogView = LayoutInflater.from(getContext())
                 .inflate(R.layout.create_appointment_dialog, null);
